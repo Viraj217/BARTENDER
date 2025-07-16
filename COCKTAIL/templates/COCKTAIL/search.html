@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form method="get">
+  {{ form }}
+  <button type="submit">Search</button>
+</form>
+
+{% if results %}
+  <ul>
+    {% for drink in results %}
+      <li>
+        <h3>{{ drink.name }}</h3>
+        {% if drink.category %}
+            <p><strong>Category:</strong> {{ drink.category }}</p>
+        {%endif %}
+        <img src="{{ drink.image }}" width="100">
+        {% if drink.instructions %}
+            <p>{{ drink.instructions }}</p>
+        {% endif %}      
+       </li>
+    {% endfor %}
+  </ul>
+{% elif form.is_bound %}
+  <p>No drinks found.</p>
+{% endif %}
+    
+</body>
+</html>
+
+
