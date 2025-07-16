@@ -20,7 +20,15 @@
         {% if drink.category %}
             <p><strong>Category:</strong> {{ drink.category }}</p>
         {%endif %}
-        <img src="{{ drink.image }}" width="100">
+        <p>ID: {{ drink.id }}</p>
+        {% if drink.id %}
+          <a href="{% url 'detail-page' drink.id %}">
+            <img src="{{ drink.image }}" width="100">
+          </a>
+        {% else %}
+          <img src="{{ drink.image }}" width="100"> {# No link if no ID #}
+        {% endif %}
+
         {% if drink.instructions %}
             <p>{{ drink.instructions }}</p>
         {% endif %}      

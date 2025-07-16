@@ -23,6 +23,7 @@ def drink_form(request):
         if data['drinks']:
             for d in data['drinks']:
                 results.append({
+            'id': d['idDrink'],
             'name': d['strDrink'],
             'category': d['strCategory'],
             'instructions': d['strInstructions'],
@@ -45,9 +46,34 @@ def ingredient_form(request):
         if data['drinks']:
             for d in data['drinks']:
                 results.append({
+            'id': d['idDrink'],
             'name': d['strDrink'],
             'image': d['strDrinkThumb'],
         })
 
 
     return render(request, 'COCKTAIL/search.html', {'form': form, 'results': results})
+
+def detail_page(request, id):
+    results=[]
+    url=f'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={id}'
+
+    response=requests.get(url)
+    data=response.json()
+
+    if data['drinks']:
+        for d in data['drinks']:
+            results.append({
+                'name' : d['strDrink'],
+                'image': d['strDrinkThumb'],
+                'alcohol':d['strAlcoholic'],
+                'instruction':d['strInstructions'],
+                'ing1':d['strIngredient1'],
+                'ing2':d['strIngredient2'],
+                'ing3':d['strIngredient3'],
+                'm1':d['strMeasure1'],
+                'm2':d['strMeasure2'],
+                'm3':d['strMeasure3'],
+            })
+    
+    return render(request, 'COCKTAIL/display.html', {'results':results})

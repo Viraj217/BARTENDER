@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if results %}
+  <ul>
+    {% for drink in results %}
+      <li>
+        <h3>{{ drink.name }}</h3>
+        
+            <p><strong>Type?:</strong> {{ drink.alcohol }}</p>
+        
+        
+          <img src="{{ drink.image }}" width="100">
+        
+            <p>{{ drink.instructions }}</p>
+
+            <p>Ingredients used:</p>
+            <ol>
+                <li>{{drink.ing1}}: {{drink.m1}}</li>
+                <li>{{drink.ing2}}: {{drink.m2}}</li>
+                <li>{{drink.ing3}}: {{drink.m3}}</li>
+            </ol>
+       </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</body>
+</html>
