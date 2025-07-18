@@ -6,13 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Most Searched Drinks</h1>
-    <ol>
-        {% for drink in drinks %}
-            <li>{{ drink.name }} — {{ drink.search_count }} time{{ drink.search_count|pluralize }}</li>
-        {% empty %}
-            <li>No searches yet!</li>
-        {% endfor %}
-    </ol>    
+<h2>Most Searched Drinks</h2>
+<ol>
+  {% for drink in drinks %}
+    <li>{{ drink.drink_name }} - searched {{ drink.drink_count }} times</li>
+  {% endfor %}
+</ol>
 </body>
 </html>

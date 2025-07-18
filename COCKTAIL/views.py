@@ -81,5 +81,5 @@ def detail_page(request, id):
     return render(request, 'COCKTAIL/display.html', {'results':results})
 
 def show_result(request):
-    obj=drink_model.objects.all().order_by('-drink_count')
-    return render(request, "all_searches.html", {"drinks": obj})
+    drink=drink_model.objects.all().order_by('-drink_count')
+    return render(request, "COCKTAIL/all_searches.html", {"drinks": drink})
