@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>Most Searched Drinks</h1>
+    <ol>
+        {% for drink in drinks %}
+            <li>{{ drink.name }} — {{ drink.search_count }} time{{ drink.search_count|pluralize }}</li>
+        {% empty %}
+            <li>No searches yet!</li>
+        {% endfor %}
+    </ol>    
+</body>
+</html>

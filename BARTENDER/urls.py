@@ -21,6 +21,7 @@ from COCKTAIL.views import *
 urlpatterns = [
     path('' ,home , name='home'),
     path('search-drink/', drink_form, name='search_drink'),
+    path('all-searches/', show_result, name='all_searches'),
     path('detail-page/<int:id>/', detail_page, name='detail-page'),
     path('search-ingredient/', ingredient_form, name='search_ingredient'),
     path('bartender-view/', bartender_view, name='bartender_view'),

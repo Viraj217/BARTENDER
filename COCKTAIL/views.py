@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import requests 
 from .forms import DRINKFORM
 from .forms import INGREDIENTFORM
+from .models import drink_model
 
 def home(request):
     return render(request, 'COCKTAIL/index.html')
@@ -20,6 +21,9 @@ def drink_form(request):
         response = requests.get(url)
         data = response.json()
 
+        obj ,_ = drink_model.objects.get_or_create(drink_name=drink)
+        obj.drink_count += 1
+        obj.save()
         if data['drinks']:
             for d in data['drinks']:
                 results.append({
@@ -29,8 +33,6 @@ def drink_form(request):
             'instructions': d['strInstructions'],
             'image': d['strDrinkThumb'],
         })
-
-
     return render(request, 'COCKTAIL/search.html', {'form': form, 'results': results})
 
 def ingredient_form(request):
@@ -77,3 +79,7 @@ def detail_page(request, id):
             })
     
     return render(request, 'COCKTAIL/display.html', {'results':results})
+
+def show_result(request):
+    obj=drink_model.objects.all().order_by('-drink_count')
+    return render(request, "all_searches.html", {"drinks": obj})
